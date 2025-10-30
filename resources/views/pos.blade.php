@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Topbar -->
 <header class="topbar">
   <div class="brand" onclick="window.location='{{ route('pos') }}'">
     <div class="logo">PG</div>
@@ -10,29 +11,33 @@
     </div>
   </div>
   <div class="nav">
-  <a href="{{ route('pos') }}" class="nav-btn {{ ($activePage == 'pos') ? 'active' : '' }}" data-page="pos">POS</a>
-  <a href="{{ route('inventory') }}" class="nav-btn {{ ($activePage == 'inventory') ? 'active' : '' }}" data-page="inventory">Inventory</a>
-  <a href="{{ route('report') }}" class="nav-btn {{ ($activePage == 'report') ? 'active' : '' }}" data-page="report">Sales Report</a>
-</div>
-
+    <a href="{{ route('pos') }}" class="nav-btn {{ ($activePage == 'pos') ? 'active' : '' }}">POS</a>
+    <a href="{{ route('inventory') }}" class="nav-btn {{ ($activePage == 'inventory') ? 'active' : '' }}">Inventory</a>
+    <a href="{{ route('report') }}" class="nav-btn {{ ($activePage == 'report') ? 'active' : '' }}">Sales Report</a>
+  </div>
 </header>
 
+<!-- Main Content -->
 <main class="container">
-  <!-- POS Page -->
+
+  <!-- POS / Menu -->
   <div class="content page {{ ($activePage == 'pos') ? 'active' : '' }}" id="pos">
     <div class="menu-controls">
       <input type="search" id="menu-search" placeholder="Search menu...">
     </div>
-    <div class="menu-grid" id="menu-grid"></div>
+    <div class="menu-grid" id="menu-grid">
+      <!-- Menu items injected by JS -->
+    </div>
   </div>
 
   <!-- Sidebar / Cart -->
   <aside class="sidebar" id="sidebar">
     <div class="cart-header">
       <div class="cart-title">Cart (<span id="cart-count">0 items</span>)</div>
-      <button id="cart-toggle" class="theme-toggle">🛒</button>
     </div>
-    <div class="cart-list" id="cart-items"></div>
+    <div class="cart-list" id="cart-items">
+      <!-- Cart items injected by JS -->
+    </div>
     <div class="cart-summary">
       <div>Total:</div>
       <div class="cart-total" id="cart-total">₱0</div>
@@ -59,7 +64,9 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <!-- Inventory injected by JS -->
+        </tbody>
       </table>
     </div>
     <div style="margin-top:12px; display:flex; gap:10px;">
@@ -83,7 +90,9 @@
             <th>Total</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <!-- Sales report injected by JS -->
+        </tbody>
       </table>
     </div>
     <div id="report-summary" style="margin-top:12px; font-weight:700;"></div>
@@ -91,8 +100,10 @@
       <button id="clear-sales" class="btn ghost">Clear Sales</button>
     </div>
   </div>
+
 </main>
 
+<!-- Receipt Modal -->
 <div id="receipt-modal" class="modal hidden" aria-hidden="true">
   <div class="modal-content">
     <div id="receipt"></div>
@@ -103,8 +114,11 @@
   </div>
 </div>
 
+<!-- Toast -->
 <div id="toast" class="toast hidden"></div>
 
-<link rel="stylesheet" href="{{ asset('css/pos.css') }}">
+<!-- JS & CSS -->
 <script src="{{ asset('js/pos.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 @endsection
